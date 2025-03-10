@@ -15,8 +15,8 @@ const MessageSchema: Schema<Message> =  new Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
-})
+    },
+});
 
 
 export interface User extends Document {
@@ -26,7 +26,7 @@ export interface User extends Document {
     verifyCode: string;
     verifyCodeExpiry: Date;
     isAcceptingMessage: boolean;
-    isVarified: boolean;
+    isVerified: boolean;
     messages: Message[]
 }
 
@@ -56,7 +56,7 @@ const UserSchema: Schema<User> =  new Schema({
         type: Date,
         required: [true, "Verify code expiry is required"]
     },
-    isVarified: {
+    isVerified: {
         type: Boolean,
         default: false
     },
@@ -65,7 +65,7 @@ const UserSchema: Schema<User> =  new Schema({
         default: true
     },
     messages: [MessageSchema]
-})
+});
 
 const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User", UserSchema)
 
